@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { FloatLabel } from 'primereact/floatlabel';
 import './RegisterPage.css';
 import loginImage from '../assets/images/banner.svg';
 
-const RegisterPage: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
+const SetNewPasswordPage: React.FC = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [reading_preference, setReadingPreference] = useState('');
-  const [favourite_genre, setFavouriteGenre] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSignup = (e: React.FormEvent) => {
@@ -34,27 +29,6 @@ const RegisterPage: React.FC = () => {
       <img src={loginImage} alt="Login Illustration" className="login-image" /> 
         <h2 className="signup-title">Register</h2>
         <form onSubmit={handleSignup} className="signup-form">
-          <FloatLabel>
-            <InputText
-              id="username"
-              className="bg-white-100 w-full"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              required
-              autoFocus
-            />
-            <label htmlFor="username">Username</label>
-          </FloatLabel>
-          <FloatLabel>
-            <InputText
-              id="email"
-              className="bg-white-100 w-full"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
-            <label htmlFor="email">Email</label>
-          </FloatLabel>
           <FloatLabel>
             <Password
               inputClassName="w-full"
@@ -81,42 +55,17 @@ const RegisterPage: React.FC = () => {
             />
             <label htmlFor="confirmPassword">Confirm Password</label>
           </FloatLabel>
-          <FloatLabel>
-            <InputText
-              id="reading_preference"
-              className="bg-white-100 w-full"
-              value={reading_preference}
-              onChange={(e) => setReadingPreference(e.target.value)}
-              required
-              autoFocus
-            />
-            <label htmlFor="reading_preference">Reading Preference</label>
-          </FloatLabel>
-          <FloatLabel>
-            <InputText
-              id="favourite_genre"
-              className="bg-white-100 w-full"
-              value={favourite_genre}
-              onChange={(e) => setFavouriteGenre(e.target.value)}
-              required
-              autoFocus
-            />
-            <label htmlFor="favourite_genre">Favourite Genre</label>
-          </FloatLabel>
           <Button
-            label="Register"
+            label="Update"
             icon="pi pi-user-plus"
             loading={loading}
             type="submit"
             className="signup-button"
           />
         </form>
-        <div className="signup-links">
-          <a href="/login" className="login-link">Already have an account? Log in</a>
-        </div>
       </div>
     </div>
   );
 };
 
-export default RegisterPage;
+export default SetNewPasswordPage;

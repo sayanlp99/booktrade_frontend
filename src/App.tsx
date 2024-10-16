@@ -5,6 +5,9 @@ import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import VerifyEmailPage from './pages/VerifyEmailPage';
 import OtpVerifyPage from './pages/OtpVerifyPage';
+import VerifyForgotPasswordEmailPage from './pages/VerifyForgotPasswordEmailPage';
+import OtpForgotPasswordVerifyPage from './pages/OtpForgotPasswordVerifyPage';
+import SetNewPasswordPage from './pages/SetNewPasswordPage';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
@@ -24,10 +27,13 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/verifyEmail" element={<VerifyEmailPage />}/>
         <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/verifyEmail" element={<VerifyEmailPage />}/>
         <Route path="/otpVerify" element={<OtpVerifyPage />} />
+        <Route path="/verifyForgotPasswordEmail" element={<VerifyForgotPasswordEmailPage />}/>
+        <Route path="/otpForgotPasswordVerify" element={<OtpForgotPasswordVerifyPage />} />
+        <Route path="/setNewPassword" element={<SetNewPasswordPage />} />
         <Route
           path="/"
           element={

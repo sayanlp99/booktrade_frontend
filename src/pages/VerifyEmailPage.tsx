@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
-import { Password } from 'primereact/password';
 import { FloatLabel } from 'primereact/floatlabel';
 import loginImage from '../assets/images/banner.svg';
 
@@ -13,11 +12,6 @@ const VerifyEmailPage: React.FC = () => {
         e.preventDefault();
         setLoading(true);
         setTimeout(() => {
-        //   if (password !== confirmPassword) {
-        //     alert("Passwords do not match!");
-        //   } else {
-        //     alert("Signup successful!");
-        //   }
           setLoading(false);
         }, 1000);
       };
@@ -39,13 +33,15 @@ const VerifyEmailPage: React.FC = () => {
                   autoFocus
                 />
               </FloatLabel>
-
               <Button
                 label="Send OTP"
                 loading={loading}
                 type="submit"
                 className="verify-button"
               />
+              <div className="signup-links">
+                <a href="/login" className="login-link">Already have an account? Log in</a>
+            </div>
             </form>
           </div>
         </div>

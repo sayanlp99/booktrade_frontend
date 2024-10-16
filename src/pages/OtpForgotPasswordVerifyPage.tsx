@@ -3,7 +3,7 @@ import { Button } from 'primereact/button';
 import loginImage from '../assets/images/banner.svg';
 import { InputOtp } from 'primereact/inputotp';
 
-const OtpVerifyPage: React.FC = () => {
+const OtpForgotPasswordVerifyPage: React.FC = () => {
     const [otp, setOtp] = useState<number>();
     const [loading, setLoading] = useState(false);
 
@@ -40,4 +40,4 @@ const OtpVerifyPage: React.FC = () => {
       );
 };
 
-export default OtpVerifyPage;
+export default OtpForgotPasswordVerifyPage;
