@@ -66,7 +66,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
         </form>
         <div className="login-links">
             <a href="/verifyEmail" className="register">Register</a>
-            <a href="/forgot-password" className="forgot-password">Forgot Password?</a>
+            <a href="/verifyForgotPasswordEmail" className="forgot-password">Forgot Password?</a>
           </div>
       </div>
     </div>

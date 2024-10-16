@@ -28,20 +28,21 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-        <Route path="/register" element={<RegisterPage />} />
         <Route path="/verifyEmail" element={<VerifyEmailPage />}/>
         <Route path="/otpVerify" element={<OtpVerifyPage />} />
+        <Route path="/register" element={<RegisterPage />} />
         <Route path="/verifyForgotPasswordEmail" element={<VerifyForgotPasswordEmailPage />}/>
         <Route path="/otpForgotPasswordVerify" element={<OtpForgotPasswordVerifyPage />} />
         <Route path="/setNewPassword" element={<SetNewPasswordPage />} />
-        <Route
+        <Route path="/home" element={<HomePage />} />
+        {/* <Route
           path="/"
           element={
             <ProtectedRoute>
               <HomePage />
             </ProtectedRoute>
           }
-        />
+        /> */}
       </Routes>
     </Router>
   );
