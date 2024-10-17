@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { Password } from 'primereact/password';
 import { FloatLabel } from 'primereact/floatlabel';
-import './RegisterPage.css';
+import './main.css';
 import loginImage from '../assets/images/banner.svg';
 
 const SetNewPasswordPage: React.FC = () => {

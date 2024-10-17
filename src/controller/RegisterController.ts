@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { sendEmailOtp, verifyOtp, registerUser } from '../services/RegisterService';
+import { Toast } from 'primereact/toast';
 
 export const useRegisterController = () => {
   const [step, setStep] = useState<'emailVerification' | 'otpVerification' | 'registration'>('emailVerification');
@@ -39,6 +41,10 @@ export const useRegisterController = () => {
     }
   };
 
+  const navigate = useNavigate();
+
+  const toast = useRef<Toast>(null);
+
   const handleRegister = async () => {
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
@@ -55,7 +61,10 @@ export const useRegisterController = () => {
         favorite_genres,
         full_name,
       });
-      alert('Signup successful!');
+      console.log('navigating');
+      navigate('/login', { replace: true });
+      console.log('again');
+      toast.current?.show({severity:'success', summary: 'Success', detail:'User Registered', life: 3000});
     } catch (error) {
       console.error('Error during signup:', error);
     } finally {
@@ -86,5 +95,6 @@ export const useRegisterController = () => {
     handleSendOtp,
     handleVerifyOtp,
     handleRegister,
+    toast,
   };
 };
