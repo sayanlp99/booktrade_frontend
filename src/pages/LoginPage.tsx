@@ -3,7 +3,7 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { FloatLabel } from 'primereact/floatlabel';
-import './LoginPage.css';
+import './main.css';
 import loginImage from '../assets/images/banner.svg';
 
 interface LoginPageProps {
@@ -65,7 +65,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
           />
         </form>
         <div className="login-links">
-            <a href="/verifyEmail" className="register">Register</a>
+            <a href="/register" className="register">Register</a>
             <a href="/verifyForgotPasswordEmail" className="forgot-password">Forgot Password?</a>
           </div>
       </div>

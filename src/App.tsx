@@ -3,8 +3,6 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
-import VerifyEmailPage from './pages/VerifyEmailPage';
-import OtpVerifyPage from './pages/OtpVerifyPage';
 import VerifyForgotPasswordEmailPage from './pages/VerifyForgotPasswordEmailPage';
 import OtpForgotPasswordVerifyPage from './pages/OtpForgotPasswordVerifyPage';
 import SetNewPasswordPage from './pages/SetNewPasswordPage';
@@ -28,8 +26,6 @@ function App() {
     <Router>
       <Routes>
         <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
-        <Route path="/verifyEmail" element={<VerifyEmailPage />}/>
-        <Route path="/otpVerify" element={<OtpVerifyPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/verifyForgotPasswordEmail" element={<VerifyForgotPasswordEmailPage />}/>
         <Route path="/otpForgotPasswordVerify" element={<OtpForgotPasswordVerifyPage />} />
