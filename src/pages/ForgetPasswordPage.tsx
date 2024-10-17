@@ -1,90 +1,22 @@
-import React, { useState } from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { InputOtp } from 'primereact/inputotp';
 import { FloatLabel } from 'primereact/floatlabel';
 import loginImage from '../assets/images/banner.svg';
-import axios from 'axios';
-import { API_URL } from '../utils/url';
+import { useForgetPasswordController } from '../controller/ForgetPassword';
 
-// Model
-interface ForgotPasswordModel {
-  email: string;
-  otp: string;
-  password: string;
-  confirmPassword: string;
-}
-
-// Controller: Service to handle API calls
-const ForgotPasswordService = {
-  sendEmailOtp: async (email: string) => {
-    try {
-      const response = await axios.post(`${API_URL}/api/auth/forgetPasswordOtp`, { email });
-      return response.data;
-    } catch (error) {
-      throw new Error('Failed to send OTP');
-    }
-  },
-  verifyOtpAndChangePassword: async (uuid: string, otp: string, password: string) => {
-    try {
-      const response = await axios.post(`${API_URL}/api/auth/forgetPasswordChangePassword`, { uuid, otp, password });
-      return response.data;
-    } catch (error) {
-      throw new Error('Failed to verify OTP or change password');
-    }
-  }
-};
-
-// View: Main component
 const ForgotPasswordPage: React.FC = () => {
-  const [step, setStep] = useState(1); // 1: Email, 2: OTP, 3: Password
-  const [loading, setLoading] = useState(false);
-  const [form, setForm] = useState<ForgotPasswordModel>({ email: '', otp: '', password: '', confirmPassword: '' });
-  const [uuid, setUuid] = useState<string | null>(null);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target;
-    setForm({ ...form, [id]: value });
-  };
-
-  const handleEmailSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const response = await ForgotPasswordService.sendEmailOtp(form.email);
-      setUuid(response.uuid); // Assuming UUID is returned after email OTP is sent
-      setStep(2); // Move to OTP step
-    } catch (error) {
-      alert(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleOtpSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStep(3); // Move to password step after OTP verification
-  };
-
-  const handlePasswordSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (form.password !== form.confirmPassword) {
-      alert('Passwords do not match!');
-      return;
-    }
-    setLoading(true);
-    try {
-      if (uuid) {
-        await ForgotPasswordService.verifyOtpAndChangePassword(uuid, form.otp, form.password);
-        alert('Password changed successfully!');
-      }
-    } catch (error) {
-      alert(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const {
+    step,
+    loading,
+    form,
+    setForm,
+    handleInputChange,
+    handleOtpSubmit,
+    handlePasswordSubmit,
+    handleEmailSubmit
+  } = useForgetPasswordController();
 
   return (
     <div className="login-container">

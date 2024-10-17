@@ -8,7 +8,7 @@ import { InputOtp } from 'primereact/inputotp';
 import { Toast } from 'primereact/toast';
 import loginImage from '../assets/images/banner.svg';
 import './main.css';
-import { useRegisterController } from '../controller/RegisterController';
+import { useRegisterController } from '../controller/Register';
 
 const RegisterPage: React.FC = () => {
   const {

@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { sendEmailOtp, verifyOtp, registerUser } from '../services/RegisterService';
+import { sendEmailOtp, verifyOtp, registerUser } from '../services/Register';
 import { Toast } from 'primereact/toast';
 
 export const useRegisterController = () => {
