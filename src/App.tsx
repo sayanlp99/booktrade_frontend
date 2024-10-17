@@ -3,9 +3,7 @@ import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-d
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
-import VerifyForgotPasswordEmailPage from './pages/VerifyForgotPasswordEmailPage';
-import OtpForgotPasswordVerifyPage from './pages/OtpForgotPasswordVerifyPage';
-import SetNewPasswordPage from './pages/SetNewPasswordPage';
+import ForgotPasswordPage from './pages/ForgetPasswordPage';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
@@ -27,10 +25,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/verifyForgotPasswordEmail" element={<VerifyForgotPasswordEmailPage />}/>
-        <Route path="/otpForgotPasswordVerify" element={<OtpForgotPasswordVerifyPage />} />
-        <Route path="/setNewPassword" element={<SetNewPasswordPage />} />
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/forget_password" element={<ForgotPasswordPage />}/>
         <Route
           path="/"
           element={
