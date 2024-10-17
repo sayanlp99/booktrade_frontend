@@ -35,14 +35,14 @@ function App() {
         <Route path="/otpForgotPasswordVerify" element={<OtpForgotPasswordVerifyPage />} />
         <Route path="/setNewPassword" element={<SetNewPasswordPage />} />
         <Route path="/home" element={<HomePage />} />
-        {/* <Route
+        <Route
           path="/"
           element={
             <ProtectedRoute>
               <HomePage />
             </ProtectedRoute>
           }
-        /> */}
+        />
       </Routes>
     </Router>
   );
