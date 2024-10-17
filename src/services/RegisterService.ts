@@ -1,12 +1,13 @@
 import axios from 'axios';
+import { API_URL } from '../utils/url';
 
 export const sendEmailOtp = async (email: string): Promise<string> => {
-  const response = await axios.post('http://127.0.0.1:8000/api/auth/sendEmailOtp', { email });
-  return response.data.uuid; // Returns UUID
+  const response = await axios.post(`${API_URL}/api/auth/sendEmailOtp`, { email });
+  return response.data.uuid;
 };
 
 export const verifyOtp = async (uuid: string | null, otp: number | undefined): Promise<void> => {
-  await axios.post('http://127.0.0.1:8000/api/auth/verifyEmailOtp', { uuid, otp });
+  await axios.post(`${API_URL}/api/auth/verifyEmailOtp`, { uuid, otp });
 };
 
 export const registerUser = async (userData: {
@@ -18,5 +19,5 @@ export const registerUser = async (userData: {
   favorite_genres: string;
   full_name: string;
 }): Promise<void> => {
-  await axios.post('http://127.0.0.1:8000/api/auth/registerUser', userData);
+  await axios.post(`${API_URL}/api/auth/registerUser`, userData);
 };
