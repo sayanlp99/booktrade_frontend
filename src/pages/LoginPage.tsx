@@ -85,6 +85,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
             className="bg-white-100 w-full"
             toggleMask
             pt={{ iconField: { root: { className: 'w-full' } } }}
+            feedback={false}
         />
             <label htmlFor="password">Password</label>
           </FloatLabel>

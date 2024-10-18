@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useLocalStorage } from "./useLocalStorage";
 
 interface AuthContextType {
-  user: any; // Replace 'any' with the specific type of 'user' if known
-  login: (data: any) => Promise<void>; // Replace 'any' with the specific type of 'data' if known
+  user: any;
+  login: (data: any) => Promise<void>; 
   logout: () => void;
 }
 
