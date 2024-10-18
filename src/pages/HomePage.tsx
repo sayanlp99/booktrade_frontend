@@ -4,9 +4,12 @@ import { InputText } from 'primereact/inputtext';
 // import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Card } from 'primereact/card';
 import { Avatar } from 'primereact/avatar';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState("")
+  const isAuthenticated = localStorage.getItem('user');
+  const navigate = useNavigate();
 
   const categories = [
     "Fiction", "Non-fiction", "Mystery", "Sci-Fi", "Romance", "Biography", "History", "Self-help"
@@ -22,6 +25,13 @@ export default function HomePage() {
     { id: 7, title: "Jane Eyre", author: "Charlotte Brontë", cover: "/placeholder.svg?height=200&width=150", rating: 4.6, location: "San Antonio, TX" },
     { id: 8, title: "The Hobbit", author: "J.R.R. Tolkien", cover: "/placeholder.svg?height=200&width=150", rating: 4.7, location: "San Diego, CA" },
   ]
+
+  
+  
+  if(isAuthenticated === "null"){
+    localStorage.removeItem('user');
+    navigate("/login", { replace: true });
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">

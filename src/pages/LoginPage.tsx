@@ -3,20 +3,23 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { FloatLabel } from 'primereact/floatlabel';
-import './main.css';
 import loginImage from '../assets/images/banner.svg';
 import { useAuth } from '../hooks/useAuth';
 import { API_URL } from '../utils/url';
+import { useNavigate } from "react-router-dom";
+import './main.css';
 
-interface LoginPageProps {
-  onLogin: (token: string) => void;
-}
-
-const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
+const LoginPage: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  const isAuthenticated = localStorage.getItem('user');
+  const navigate = useNavigate();
+  
+  if(isAuthenticated !== "null"){
+    navigate("/", { replace: true });
+  }
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,8 +36,8 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
 
       if (response.ok) {
         const data = await response.json();
-        onLogin(data.token); 
-        await login({ username });
+        let token = data.token; 
+        await login({ username, token });
       } else {
         alert('Invalid credentials');
       }
@@ -45,20 +48,6 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
       setLoading(false);
     }
   };
-
-  // const handleLogin = async (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   setLoading(true);
-  //   setTimeout(() => {
-  //     if (username === 'user' && password === 'password') {
-  //       onLogin('valid-token');
-  //     } else {
-  //       alert('Invalid credentials');
-  //     }
-  //     setLoading(false);
-  //   }, 1000);
-  //   await login({ username });
-  // };
 
   return (
     <div className="login-container">
