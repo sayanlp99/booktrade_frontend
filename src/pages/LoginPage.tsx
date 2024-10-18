@@ -5,6 +5,8 @@ import { Password } from 'primereact/password';
 import { FloatLabel } from 'primereact/floatlabel';
 import './main.css';
 import loginImage from '../assets/images/banner.svg';
+import { useAuth } from '../hooks/useAuth';
+import { API_URL } from '../utils/url';
 
 interface LoginPageProps {
   onLogin: (token: string) => void;
@@ -14,19 +16,49 @@ const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      if (username === 'user' && password === 'password') {
-        onLogin('valid-token');
+
+    try {
+      const response = await fetch(`${API_URL}/api/auth/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        onLogin(data.token); 
+        await login({ username });
       } else {
         alert('Invalid credentials');
       }
+    } catch (error) {
+      console.error('Error during login:', error);
+      alert('An error occurred during login');
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
+
+  // const handleLogin = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     if (username === 'user' && password === 'password') {
+  //       onLogin('valid-token');
+  //     } else {
+  //       alert('Invalid credentials');
+  //     }
+  //     setLoading(false);
+  //   }, 1000);
+  //   await login({ username });
+  // };
 
   return (
     <div className="login-container">

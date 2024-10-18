@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate, useRoutes } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import HomePage from './pages/HomePage';
 import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgetPasswordPage';
+import { AuthProvider } from './hooks/useAuth';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const isAuthenticated = localStorage.getItem('isAuthenticated');
@@ -18,14 +19,14 @@ function App() {
   const handleLogin = (token: string) => {
     localStorage.setItem('isAuthenticated', token);
     setIsAuthenticated(true);
-  };
+  };  
 
   return (
-    <Router>
+    <AuthProvider>
       <Routes>
-        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/forget_password" element={<ForgotPasswordPage />}/>
+        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
         <Route
           path="/"
           element={
@@ -35,7 +36,7 @@ function App() {
           }
         />
       </Routes>
-    </Router>
+    </AuthProvider>
   );
 }
 
