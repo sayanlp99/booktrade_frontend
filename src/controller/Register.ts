@@ -52,6 +52,7 @@ export const useRegisterController = () => {
     }
     setLoading(true);
     try {
+      console.log(step);
       await registerUser({
         uuid,
         username,
@@ -61,9 +62,7 @@ export const useRegisterController = () => {
         favorite_genres,
         full_name,
       });
-      console.log('navigating');
       navigate('/login', { replace: true });
-      console.log('again');
       toast.current?.show({severity:'success', summary: 'Success', detail:'User Registered', life: 3000});
     } catch (error) {
       console.error('Error during signup:', error);

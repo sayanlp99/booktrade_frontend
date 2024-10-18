@@ -89,7 +89,7 @@ const RegisterPage: React.FC = () => {
         {step === 'registration' && (
           <>
             <h2 className="signup-title">Register</h2>
-            <form className='signup-form' onSubmit={handleRegister}>
+            <form className='signup-form' onSubmit={(e) => { e.preventDefault(); handleRegister(); }} >
               <FloatLabel>
                 <InputText
                   id="full_name"
