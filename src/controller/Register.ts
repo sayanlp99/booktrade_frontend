@@ -52,7 +52,6 @@ export const useRegisterController = () => {
     }
     setLoading(true);
     try {
-      console.log(step);
       await registerUser({
         uuid,
         username,
