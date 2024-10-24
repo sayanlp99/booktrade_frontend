@@ -14,10 +14,12 @@ import { PrimeIcons } from 'primereact/api';
 import { useBookController } from '../controller/Book';
 import { Book } from '../models/Book';
 import { ProgressSpinner } from 'primereact/progressspinner';
+import { useNavigate } from 'react-router-dom';
 
 
 const Navbar: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const navigate = useNavigate();
 
   const start = (
     <div className="text-xl font-bold cursor-pointer flex flex-row pl-2">
@@ -46,7 +48,7 @@ const Navbar: React.FC = () => {
         label="Add Book"
         icon="pi pi-plus"
         className="p-button-primary p-button-sm"
-        onClick={() => console.log('Add Book clicked')}
+        onClick={() => navigate('/add_book')}
       />
       <Avatar
         label='U'
@@ -72,17 +74,6 @@ interface BookGridProps {
   onExchangeRequest: (bookId: string) => void;
 }
 
-// const getConditionClass = (condition: Book['condition']) => {
-//   const classes = {
-//     'New': 'bg-green-500',
-//     'Like New': 'bg-blue-500',
-//     'Good': 'bg-yellow-500',
-//     'Fair': 'bg-orange-500',
-//     'Poor': 'bg-red-500'
-//   };
-//   return classes[condition] || 'bg-gray-500';
-// };
-
 const BookGrid: React.FC<BookGridProps> = ({ books, onExchangeRequest }) => {
 
   return (
@@ -92,7 +83,7 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onExchangeRequest }) => {
           <Card
             key={book.book_id}
             className="border-round-xl shadow-md hover:shadow-lg transition-all duration-200"
-            style={{ minWidth: "12rem" }}
+            style={{ maxWidth: "14rem" }}
           >
             <div className="relative" style={{ maxHeight: "12rem" }}>
               <img
@@ -103,7 +94,7 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onExchangeRequest }) => {
               />
               <Badge
                 value={book.condition}
-                className={`absolute {getConditionClass(book.condition)}`}
+                className={`absolute }`}
                 style={{ top: "0.5rem", right: "0.5rem", zIndex: 2 }}  // Padding inside image
               />
             </div>
