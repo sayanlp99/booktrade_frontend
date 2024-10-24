@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ForgotPasswordService } from "../services/ForgetPassword";
 import { ForgotPasswordModel } from '../models/ForgetPassword';
-import { Toast } from 'primereact/toast';
+
 
 export const useForgetPasswordController = () => {
   const [step, setStep] = useState(1);
@@ -36,8 +36,6 @@ export const useForgetPasswordController = () => {
 
   const navigate = useNavigate();
 
-  const toast = useRef<Toast>(null);
-
   const handlePasswordSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (form.password !== form.confirmPassword) {
@@ -48,9 +46,7 @@ export const useForgetPasswordController = () => {
     try {
       if (uuid) {
         await ForgotPasswordService.verifyOtpAndChangePassword(uuid, form.otp, form.password);
-        // alert('Password changed successfully!');
         navigate('/login', { replace: true });
-        toast.current?.show({severity:'success', summary: 'Success', detail:'User Registered', life: 3000});
       }
     } catch (error) {
       alert(error);

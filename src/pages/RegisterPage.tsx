@@ -1,11 +1,9 @@
-// views/RegisterPage.tsx
 import React from 'react';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
 import { FloatLabel } from 'primereact/floatlabel';
 import { InputOtp } from 'primereact/inputotp';
-import { Toast } from 'primereact/toast';
 import loginImage from '../assets/images/banner.svg';
 import './main.css';
 import { useRegisterController } from '../controller/Register';
@@ -33,12 +31,10 @@ const RegisterPage: React.FC = () => {
     handleSendOtp,
     handleVerifyOtp,
     handleRegister,
-    toast,
   } = useRegisterController();
 
   return (
     <div className="signup-container">
-      <Toast ref={toast} />
       <div className="card signup-card">
         <img src={loginImage} alt="Login Illustration" className="login-image" />
 
