@@ -1,0 +1,73 @@
+// import { useNavigate } from 'react-router-dom';
+import logo from '../assets/images/logo.png';
+import { Avatar } from 'primereact/avatar';
+import { Menubar } from 'primereact/menubar';
+import { MenuItem } from 'primereact/menuitem';
+import { Menu } from 'primereact/menu';
+import { useEffect, useRef, useState } from 'react';
+
+export const Navbar: React.FC = () => {
+  // const navigate = useNavigate();
+  const [username, setUsername] = useState('');
+  const menuLeft = useRef<Menu>(null);
+  const items: MenuItem[] = [
+      {
+          label: username,
+          items: [
+              {
+                  label: 'Add Book',
+                  icon: 'pi pi-plus',
+                  url: '/add_book'
+              },
+              {
+                  label: 'My Books',
+                  icon: 'pi pi-book'
+              },
+              {
+                label: 'My Profile',
+                icon: 'pi pi-user'
+              },
+              {
+                label: 'Logout',
+                icon: 'pi pi-sign-out',
+            }
+          ]
+      }
+  ];
+
+  useEffect(()=> {
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    setUsername(user.username);
+  },[])
+
+  const start = (
+    <div className="text-xl font-bold cursor-pointer flex flex-row pl-2">
+      <img src={logo} alt="Logo" className="login-image" style={{ height: "2rem" }}/>
+      <div className="text-xl font-bold cursor-pointer pl-2">
+        BookTrade
+      </div>
+    </div>
+  );
+
+  const end = (
+    <div className="flex items-center gap-4">
+      <Menu model={items} popup ref={menuLeft} id="popup_menu_left" />
+      <Avatar
+        label={username[0]}
+        shape="circle"
+        className="cursor-pointer"
+        onClick={
+          (event) =>{
+            menuLeft.current?.toggle(event);
+          }
+        }
+      />
+    </div>
+  );
+
+  return (
+    <div className="shadow-lg">
+      <Menubar start={start} end={end} className="relative w-full"/>
+    </div>
+  );
+};

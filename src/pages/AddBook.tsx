@@ -5,9 +5,12 @@ import { FileUpload } from 'primereact/fileupload';
 import { BookService } from '../services/Book';
 import { Book } from '../models/Book';
 import { useNavigate } from 'react-router-dom';
+import { Navbar } from '../components/Navbar';
+import { FloatLabel } from 'primereact/floatlabel';
+import './main.css';
 
 const AddBook: React.FC = () => {
-    const navigate = useNavigate(); 
+  const navigate = useNavigate(); 
   const [book, setBook] = useState<Omit<Book, 'book_id' | 'book_url' | 'book_path'>>({
     title: '',
     author: '',
@@ -59,62 +62,68 @@ const AddBook: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4">
-      <div className="field">
-        <label htmlFor="title">Title</label>
-        <InputText id="title" name="title" value={book.title} onChange={handleChange} required />
-      </div>
+    <>
+      <Navbar />
+      <div className='form-container'>
+      <form onSubmit={handleSubmit} className="login-form">
+        <FloatLabel className="input-group">
+          <label htmlFor="title">Title</label>
+          <InputText id="title" name="title" value={book.title} onChange={handleChange} required />
+        </FloatLabel>
 
-      <div className="field">
-        <label htmlFor="author">Author</label>
-        <InputText id="author" name="author" value={book.author} onChange={handleChange} required />
-      </div>
+        <FloatLabel className="input-group">
+          <label htmlFor="author">Author</label>
+          <InputText id="author" name="author" value={book.author} onChange={handleChange} required />
+        </FloatLabel>
 
-      <div className="field">
-        <label htmlFor="genre">Genre</label>
-        <InputText id="genre" name="genre" value={book.genre} onChange={handleChange} required />
-      </div>
+        <FloatLabel className="input-group">
+          <label htmlFor="genre">Genre</label>
+          <InputText id="genre" name="genre" value={book.genre} onChange={handleChange} required />
+        </FloatLabel>
 
-      <div className="field">
-        <label htmlFor="condition">Condition</label>
-        <InputText id="condition" name="condition" value={book.condition} onChange={handleChange} required />
-      </div>
+        <FloatLabel className="input-group">
+          <label htmlFor="condition">Condition</label>
+          <InputText id="condition" name="condition" value={book.condition} onChange={handleChange} required />
+        </FloatLabel>
 
-      <div className="field">
-        <label htmlFor="availabilityStatus">Availability Status</label>
-        <InputText
-          id="availabilityStatus"
-          name="availability_status"
-          type="checkbox"
-          checked={book.availability_status}
-          onChange={handleChange}
-        />
-      </div>
+        <div className="field">
+          <label htmlFor="availabilityStatus">Availability Status</label>
+          <InputText
+            id="availabilityStatus"
+            name="availability_status"
+            type="checkbox"
+            checked={book.availability_status}
+            onChange={handleChange}
+          />
+        </div>
 
-      <div className="field">
-        <label htmlFor="latitude">Latitude</label>
-        <InputText id="latitude" name="latitude" type="number" value={String(book.latitude)} onChange={handleChange} required />
-      </div>
+        <FloatLabel className="input-group">
+          <label htmlFor="latitude">Latitude</label>
+          <InputText id="latitude" name="latitude" type="number" value={String(book.latitude)} onChange={handleChange} required />
+        </FloatLabel>
 
-      <div className="field">
-        <label htmlFor="longitude">Longitude</label>
-        <InputText id="longitude" name="longitude" type="number" value={String(book.longitude)} onChange={handleChange} required />
-      </div>
+        <FloatLabel className="input-group">
+          <label htmlFor="longitude">Longitude</label>
+          <InputText id="longitude" name="longitude" type="number" value={String(book.longitude)} onChange={handleChange} required />
+        </FloatLabel>
 
-      <div className="field">
-        <label htmlFor="image">Image</label>
-        <FileUpload
-          name="image"
-          accept="image/*"
-          maxFileSize={1000000}
-          onSelect={handleImageUpload}
-          auto
-          customUpload
-        />
-      </div>
+        <div className="field">
+          <label htmlFor="image">Image</label>
+          <FileUpload
+            name="image"
+            accept="image/*"
+            maxFileSize={1000000}
+            onSelect={handleImageUpload}
+            auto
+            customUpload
+          />
+        </div>
 
-      <Button label="Add Book" type="submit" />
-    </form>
+        <Button label="Add Book" type="submit" />
+
+      </form>
+      </div>
+    </>
   );
 };
 

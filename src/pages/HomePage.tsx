@@ -1,73 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Menubar } from 'primereact/menubar';
+import React, { useEffect } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { Avatar } from 'primereact/avatar';
 import 'primereact/resources/themes/lara-light-indigo/theme.css';
 import 'primereact/resources/primereact.min.css';
 import 'primeicons/primeicons.css';
 import 'primeflex/primeflex.css';
 import { Card } from 'primereact/card';
 import { Badge } from 'primereact/badge';
-import logo from '../assets/images/logo.png';
 import { PrimeIcons } from 'primereact/api';
 import { useBookController } from '../controller/Book';
 import { Book } from '../models/Book';
 import { ProgressSpinner } from 'primereact/progressspinner';
-import { useNavigate } from 'react-router-dom';
-
-
-const Navbar: React.FC = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const navigate = useNavigate();
-
-  const start = (
-    <div className="text-xl font-bold cursor-pointer flex flex-row pl-2">
-      <img src={logo} alt="Logo" className="login-image" style={{ height: "2rem" }}/>
-      <div className="text-xl font-bold cursor-pointer pl-2">
-        BookTrade
-      </div>
-    </div>
-  );
-
-  const center = (
-    <span className="p-input-icon-left w-full sm:w-64 md:w-96 mx-auto">
-      <i className="pi pi-search" />
-      <InputText
-        placeholder="Search for books..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="w-full"
-      />
-    </span>
-  );
-
-  const end = (
-    <div className="flex items-center gap-4">
-      <Button
-        label="Add Book"
-        icon="pi pi-plus"
-        className="p-button-primary p-button-sm"
-        onClick={() => navigate('/add_book')}
-      />
-      <Avatar
-        label='U'
-        shape="circle"
-        className="cursor-pointer"
-      />
-    </div>
-  );
-
-  return (
-    <div className="shadow-lg">
-      <Menubar start={start} end={end} className="relative w-full">
-        {/* <div className="absolute inset-0 flex justify-center"> */}
-          {center}
-        {/* </div> */}
-      </Menubar>
-    </div>
-  );
-};
+import  { Navbar } from '../components/Navbar';
 
 interface BookGridProps {
   books: Book[];
