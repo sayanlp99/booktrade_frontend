@@ -1,15 +1,15 @@
-// import { useNavigate } from 'react-router-dom';
 import logo from '../assets/images/logo.png';
 import { Avatar } from 'primereact/avatar';
 import { Menubar } from 'primereact/menubar';
 import { MenuItem } from 'primereact/menuitem';
 import { Menu } from 'primereact/menu';
 import { useEffect, useRef, useState } from 'react';
+import { useAuth } from '../hooks/useAuth';
 
 export const Navbar: React.FC = () => {
-  // const navigate = useNavigate();
   const [username, setUsername] = useState('');
   const menuLeft = useRef<Menu>(null);
+  const { logout } = useAuth();
   const items: MenuItem[] = [
       {
           label: username,
@@ -30,10 +30,18 @@ export const Navbar: React.FC = () => {
               {
                 label: 'Logout',
                 icon: 'pi pi-sign-out',
+                command(event) {
+                  handleLogout();
+                },
             }
           ]
       }
-  ];
+  ];  
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    logout(); 
+  };
 
   useEffect(()=> {
     const user = JSON.parse(localStorage.getItem('user') || '{}');
