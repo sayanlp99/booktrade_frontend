@@ -15,6 +15,7 @@ export const Navbar: React.FC = () => {
   const items: MenuItem[] = [
       {
           label: username,
+          icon: 'pi pi-user',
           items: [
               {
                   label: 'Add Book',
@@ -33,11 +34,6 @@ export const Navbar: React.FC = () => {
                       }
                     });
                   }
-              },
-              {
-                label: 'My Profile',
-                icon: 'pi pi-user'
-
               },
               {
                 label: 'Logout',
