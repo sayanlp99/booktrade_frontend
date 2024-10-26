@@ -18,7 +18,7 @@ export const BookService = {
             throw new Error('Failed to get books');
         }
     },
-    addBook: async (book: Omit<Book, 'book_id' | 'book_url' | 'book_path'>, token: string): Promise<void> => {
+    addBook: async (book: Omit<Book, 'book_id' | 'book_url' | 'book_path' | 'owner' | 'owner_username'>, token: string): Promise<void> => {
         try{
             const formData = new FormData();
             formData.append('title', book.title);

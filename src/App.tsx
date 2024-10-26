@@ -5,6 +5,7 @@ import RegisterPage from './pages/RegisterPage';
 import ForgotPasswordPage from './pages/ForgetPasswordPage';
 import { AuthProvider } from './hooks/useAuth';
 import AddBook from './pages/AddBook';
+import BookList from './pages/BookList';
 
 const ProtectedRoute = ({ children }: { children: JSX.Element }) => {
   const isAuthenticated = localStorage.getItem('user');
@@ -31,6 +32,14 @@ function App() {
           element={
             <ProtectedRoute>
               <AddBook />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/list_book"
+          element={
+            <ProtectedRoute>
+              <BookList />
             </ProtectedRoute>
           }
         />

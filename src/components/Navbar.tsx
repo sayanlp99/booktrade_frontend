@@ -5,11 +5,13 @@ import { MenuItem } from 'primereact/menuitem';
 import { Menu } from 'primereact/menu';
 import { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 export const Navbar: React.FC = () => {
   const [username, setUsername] = useState('');
   const menuLeft = useRef<Menu>(null);
   const { logout } = useAuth();
+  const navigate = useNavigate();
   const items: MenuItem[] = [
       {
           label: username,
@@ -21,11 +23,21 @@ export const Navbar: React.FC = () => {
               },
               {
                   label: 'My Books',
-                  icon: 'pi pi-book'
+                  icon: 'pi pi-book',
+                  command: (event) => {
+                    navigate('/list_book', {
+                      state: {
+                        user_id: "",
+                        heading: "My Books",
+                        loggedUser: true,
+                      }
+                    });
+                  }
               },
               {
                 label: 'My Profile',
                 icon: 'pi pi-user'
+
               },
               {
                 label: 'Logout',

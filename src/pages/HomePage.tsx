@@ -12,6 +12,8 @@ import { useBookController } from '../controller/Book';
 import { Book } from '../models/Book';
 import { ProgressSpinner } from 'primereact/progressspinner';
 import  { Navbar } from '../components/Navbar';
+import { Avatar } from 'primereact/avatar';
+import { useNavigate } from 'react-router-dom';
 
 interface BookGridProps {
   books: Book[];
@@ -19,6 +21,17 @@ interface BookGridProps {
 }
 
 const BookGrid: React.FC<BookGridProps> = ({ books, onExchangeRequest }) => {
+  const navigate = useNavigate();
+
+  function showUserBooks(owner: string, owner_username: string) {
+    navigate('/list_book', {
+      state: {
+        user_id: owner,
+        heading: `${owner_username}'s Books`,
+        loggedUser: false,
+      }
+    });
+  }
 
   return (
     <div className="p-4">
@@ -53,6 +66,12 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onExchangeRequest }) => {
                 <i className="pi pi-map-marker text-gray-500" />
                 <span className="text-sm text-gray-500">
                   {book.latitude}, {book.longitude}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 mb-3" onClick={() => {showUserBooks(book.owner, book.owner_username);}} style={{ cursor: 'pointer' }}>
+                <Avatar label={book.owner_username[0]} style={{ maxWidth: '1rem', maxHeight: '1rem', fontSize: '0.75rem' }} shape="circle" />
+                <span className="text-sm text-gray-500">
+                  {book.owner_username}
                 </span>
               </div>
               <Button

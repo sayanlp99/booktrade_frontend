@@ -11,7 +11,7 @@ import './main.css';
 
 const AddBook: React.FC = () => {
   const navigate = useNavigate(); 
-  const [book, setBook] = useState<Omit<Book, 'book_id' | 'book_url' | 'book_path'>>({
+  const [book, setBook] = useState<Omit<Book, 'book_id' | 'book_url' | 'book_path' | 'owner' | 'owner_username'>>({
     title: '',
     author: '',
     genre: '',
