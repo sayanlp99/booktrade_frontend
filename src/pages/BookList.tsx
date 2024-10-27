@@ -4,7 +4,6 @@ import { Column } from 'primereact/column';
 import { InputText } from 'primereact/inputtext';
 import { Tag } from 'primereact/tag';
 import { Dialog } from 'primereact/dialog';
-import { Dropdown } from 'primereact/dropdown';
 import { Book } from '../models/Book';
 import { Navbar } from '../components/Navbar';
 import './main.css';
@@ -45,24 +44,6 @@ const BookList: React.FC = () => {
     const userId = state?.user_id;
     const loggedUser = state?.loggedUser;
 
-    const genreOptions = [
-        'Fiction', 
-        'Non-Fiction', 
-        'Mystery', 
-        'Science Fiction', 
-        'Fantasy', 
-        'Romance', 
-        'Biography',
-        'History',
-        'Self-Help',
-        'Other'
-    ];
-
-    const availabilityOptions = [
-        { label: 'Available', value: true },
-        { label: 'Unavailable', value: false }
-    ];
-
     const getUserSpecificBooks = async () => {
         setLoading(true);
         const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -96,7 +77,6 @@ const BookList: React.FC = () => {
 
     const handleSaveEdit = async () => {
         if (!editingBook) return;
-
         try {
             const user = JSON.parse(localStorage.getItem('user') || '{}');
             const token = user.token;
@@ -110,14 +90,11 @@ const BookList: React.FC = () => {
                     },
                 }
             );
-
-            // Refresh the book list
             await getUserSpecificBooks();
             setShowEditDialog(false);
             setEditingBook(null);
         } catch (error) {
             console.error('Error updating book:', error);
-            // You might want to show an error message to the user here
         }
     };
 
