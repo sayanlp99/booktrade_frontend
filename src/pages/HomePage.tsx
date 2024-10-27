@@ -88,10 +88,14 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onExchangeRequest }) => {
 };
 
 const HomePage: React.FC = () => {
+  const [searchQuery, setSearchQuery] = React.useState("");
+  const [filters, setFilters] = React.useState({ available: true, genre: "", latitude: "12.9716", longitude: "77.5946" });
+
   const {
     loading,
     books,
-    handleLoadBooks
+    handleLoadBooks,
+    handleBookSearch
   } = useBookController();
 
   useEffect(()=> {
@@ -100,6 +104,14 @@ const HomePage: React.FC = () => {
 
   const handleExchangeRequest = (bookId: string) => {
     console.log(`Exchange requested for book ${bookId}`);
+  };
+
+  const handleSearch = () => {
+    handleBookSearch(searchQuery, filters);
+  };
+
+  const handleFilterChange = (key: string, value: any) => {
+    setFilters((prevFilters) => ({ ...prevFilters, [key]: value }));
   };
 
   return (
@@ -112,9 +124,32 @@ const HomePage: React.FC = () => {
             <span className="p-inputgroup-addon">
                 <i className={PrimeIcons.SEARCH}></i>
             </span>
-            <InputText placeholder="Search" />
-            <Button label="Search" icon="pi pi-search" />
+            <InputText
+              placeholder="Search by title, author, or genre" 
+              value={searchQuery} 
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <Button label="Search" icon="pi pi-search" onClick={handleSearch} />
           </div>
+          <div className="p-4">
+              <div className="my-3">
+                <InputText 
+                  placeholder="Genre" 
+                  value={filters.genre} 
+                  onChange={(e) => handleFilterChange("genre", e.target.value)}
+                />
+                <InputText 
+                  placeholder="Location Latitude" 
+                  value={filters.latitude} 
+                  onChange={(e) => handleFilterChange("latitude", e.target.value)}
+                />
+                <InputText 
+                  placeholder="Location Longitude" 
+                  value={filters.longitude} 
+                  onChange={(e) => handleFilterChange("longitude", e.target.value)}
+                />
+              </div>
+            </div>
           <h1 className="text-3xl font-bold px-4">Available Books for Exchange</h1>
           <BookGrid
             books={books}
