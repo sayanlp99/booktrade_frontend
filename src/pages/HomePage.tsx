@@ -97,7 +97,7 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onExchangeRequest }) => {
 const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
   const [selectedGenre, setSelectedGenre] = React.useState("");
-  const [filters, setFilters] = React.useState({ available: true, genre: "", latitude: "12.9716", longitude: "77.5946" });
+  const [filters, setFilters] = React.useState({ available: true, genre: "", latitude: "", longitude: "" });
 
   const {
     loading,
@@ -140,7 +140,7 @@ const HomePage: React.FC = () => {
             />
             <Button label="Search" icon="pi pi-search" onClick={handleSearch} />
           </div>
-          <div className="p-4">
+          <div className="pl-4">
               <div className="my-3">
                 <Dropdown value={selectedGenre} 
                   onChange={
@@ -157,11 +157,13 @@ const HomePage: React.FC = () => {
                   highlightOnSelect={false}
                 />
                 <InputText 
+                  className='ml-4'
                   placeholder="Location Latitude" 
                   value={filters.latitude} 
                   onChange={(e) => handleFilterChange("latitude", e.target.value)}
                 />
                 <InputText 
+                  className='ml-4'
                   placeholder="Location Longitude" 
                   value={filters.longitude} 
                   onChange={(e) => handleFilterChange("longitude", e.target.value)}
