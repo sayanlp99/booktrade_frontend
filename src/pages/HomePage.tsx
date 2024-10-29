@@ -14,6 +14,7 @@ import { ProgressSpinner } from 'primereact/progressspinner';
 import  { Navbar } from '../components/Navbar';
 import { Avatar } from 'primereact/avatar';
 import { useNavigate } from 'react-router-dom';
+import { Dropdown } from 'primereact/dropdown';
 
 interface BookGridProps {
   books: Book[];
@@ -63,6 +64,12 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onExchangeRequest }) => {
                 by {book.author}
               </p>
               <div className="flex items-center gap-1 mb-3">
+                <i className="pi pi-bookmark text-gray-500" />
+                <span className="text-sm text-gray-500">
+                  {book.genre}
+                </span>
+              </div>
+              <div className="flex items-center gap-1 mb-3">
                 <i className="pi pi-map-marker text-gray-500" />
                 <span className="text-sm text-gray-500">
                   {book.latitude}, {book.longitude}
@@ -89,11 +96,13 @@ const BookGrid: React.FC<BookGridProps> = ({ books, onExchangeRequest }) => {
 
 const HomePage: React.FC = () => {
   const [searchQuery, setSearchQuery] = React.useState("");
+  const [selectedGenre, setSelectedGenre] = React.useState("");
   const [filters, setFilters] = React.useState({ available: true, genre: "", latitude: "12.9716", longitude: "77.5946" });
 
   const {
     loading,
     books,
+    allFilters,
     handleLoadBooks,
     handleBookSearch
   } = useBookController();
@@ -133,10 +142,19 @@ const HomePage: React.FC = () => {
           </div>
           <div className="p-4">
               <div className="my-3">
-                <InputText 
-                  placeholder="Genre" 
-                  value={filters.genre} 
-                  onChange={(e) => handleFilterChange("genre", e.target.value)}
+                <Dropdown value={selectedGenre} 
+                  onChange={
+                    (e) => {
+                      setSelectedGenre(e.value);
+                      handleFilterChange("genre", e.value)
+                    }
+                  } 
+                  options={allFilters}
+                  optionLabel="name" 
+                  placeholder="Genre"
+                  className="w-full md:w-14rem"
+                  checkmark={true}
+                  highlightOnSelect={false}
                 />
                 <InputText 
                   placeholder="Location Latitude" 

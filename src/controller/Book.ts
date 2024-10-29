@@ -8,11 +8,16 @@ export const useBookController = () => {
     const [loading, setLoading] = useState(false);
     const [books, setBooks] = useState<Book[]>([]);
 
+    const [allFilters, setFilters] = useState<String[]>([]);
+
     const handleLoadBooks = async () => {
         setLoading(true);
         try {
           const response = await BookService.fetchBooks();
           setBooks(response);
+          const genres: String[] = Array.from(new Set(response.map((book: { genre: any; }) => book.genre)));
+          setFilters(genres);
+          console.log(genres);
         } catch (error) {
           alert(error);
         } finally {
@@ -48,6 +53,7 @@ export const useBookController = () => {
     return {
         loading,
         books,
+        allFilters,
         setLoading,
         setBooks,
         handleLoadBooks,

@@ -57,7 +57,7 @@ export const Navbar: React.FC = () => {
   },[])
 
   const start = (
-    <div className="text-xl font-bold cursor-pointer flex flex-row pl-2">
+    <div className="text-xl font-bold cursor-pointer flex flex-row pl-2" onClick={() => navigate('/')}>
       <img src={logo} alt="Logo" className="login-image" style={{ height: "2rem" }}/>
       <div className="text-xl font-bold cursor-pointer pl-2">
         BookTrade
