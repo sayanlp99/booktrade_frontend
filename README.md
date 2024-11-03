@@ -1,46 +1,170 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Frontend Documentation for Booktrade
 
-In the project directory, you can run:
+## 1. Project Overview
 
-### `npm start`
+- **Project Name**: Booktrade
+- **Description**: Booktrade is a platform designed to facilitate book exchanges, allowing users to list, search, and manage book trades efficiently.
+- **Tech Stack**: React, TypeScript, PrimeReact.
+- **Features**:
+  - User Authentication: Secure login and registration functionality.
+  - Book CRUD Operations: Manage books listed for exchange.
+  - State Management: Handled with Context API for efficient data handling.
+  - UI Components: Reusable UI elements to ensure a cohesive design.
+  - API Integration: Communication with backend APIs for data operations.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 2. Installation and Setup
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Prerequisites
+- **Node.js**: Ensure Node.js (>= version 14.x) is installed.
+- **npm or yarn**: Recommended npm (>= version 6.x) or yarn (>= version 1.x) for dependency management.
 
-### `npm test`
+### Installation
+Follow these steps to set up the project:
+```bash
+# Clone the repository
+git clone <repo-url>
+cd <project-folder>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# Install dependencies
+npm install
+```
 
-### `npm run build`
+### Running the Application
+Below are the commands to run the application, along with environment configurations:
+```bash
+# Start the development server (runs at http://localhost:3000 by default)
+npm start
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+# For production build
+npm run build
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 3. Folder Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The project is organized for modularity, readability, and scalability:
 
-### `npm run eject`
+```
+/public                   # Public assets
+  ├── assets/images       # Images used across the app (e.g., logos, banners)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+/src
+  ├── assets/images       # Additional images/icons for internal use
+  ├── components          # Reusable UI components (e.g., Navbar)
+  ├── controller          # Contains files for managing complex data and interactions
+      ├── BookList.ts     # Controls logic for listing books
+  ├── hooks               # Custom hooks
+      ├── useAuth.ts      # Hook for authentication handling
+      ├── useLocalStorage.ts # Hook for localStorage operations
+  ├── models              # Type definitions for data models
+  ├── pages               # Main page components for routing
+      ├── AddBook.tsx     # Page to add new books
+      ├── BookList.tsx    # Page for listing books
+      ├── ForgetPassword.tsx # Password recovery page
+      ├── HomePage.tsx    # Main landing page
+      ├── LoginPage.tsx   # User login page
+      ├── RegisterPage.tsx # User registration page
+  ├── services            # API service files
+      ├── Book.ts         # API calls related to books
+      ├── ForgetPassword.ts # API calls for password recovery
+      ├── Login.ts        # API calls for login
+      ├── Register.ts     # API calls for registration
+  ├── utils               # Utility functions
+  ├── App.tsx             # Root component
+  ├── ProtectedRoute.tsx  # Higher-order component to protect routes
+  ├── index.tsx           # Application entry point
+  ├── reportWebVitals.ts  # Performance monitoring
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 4. Environment Variables
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Define necessary environment variables in a `.env` file at the root of the project.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- **API_URL**: Base URL for backend API endpoints.
 
-## Learn More
+Example `.env` file:
+```
+API_URL=http://localhost:8000/api
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## 5. Key Functionalities
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### User Authentication
+- **Description**: Users can register, log in, and reset passwords. Authentication state is managed globally.
+- **Components Used**: `Login.tsx`, `Register.tsx`, `ForgetPassword.tsx`
+- **State Management**: Managed with Context API to provide authentication state across components.
+- **API Endpoints**:
+  - `POST /auth/login`: User login
+  - `POST /auth/register`: New user registration
+  - `POST /auth/forgot-password`: Password reset
+
+### Core Features
+Detailed breakdown of primary features:
+
+- **Book Listing**:
+  - Component: `BookList.tsx`
+  - Controller: `BookList.ts` (handles data processing and API integration)
+  - API Endpoint: `GET /books` - fetches the list of available books.
+
+- **Add/Edit/Delete Book**:
+  - Component: `AddBook.tsx`
+  - API Endpoints:
+    - `POST /books` for adding a book
+    - `PUT /books/:id` for editing a book
+    - `DELETE /books/:id` for removing a book
+
+### Error Handling
+Errors are managed using UI alerts or notifications for user feedback. For network-related errors, retry logic can be implemented as needed.
+
+## 6. API Integration
+
+### Base API Configuration
+The project uses a service layer under the `services` folder to handle API interactions using axios or fetch.
+
+### List of Endpoints
+| Endpoint         | Method | Purpose                     | Component            |
+|------------------|--------|-----------------------------|-----------------------|
+| `/api/books`     | GET    | Fetch list of books         | `BookList`           |
+| `/api/auth/login`| POST   | User login                  | `Login`              |
+| `/api/books`     | POST   | Add a new book              | `AddBook`            |
+| `/api/books/:id` | PUT    | Update book details         | `AddBook`            |
+
+## 7. State Management
+
+- **Solution**: Context API is used for global state management, providing lightweight yet effective state sharing across components.
+- **Structure**: All state-related files, such as context providers, are organized within the `contexts` folder for modularity and reusability.
+- **Example**:
+  ```typescript
+  const UserContext = createContext<UserContextType | null>(null);
+  ```
+
+## 8. Styling
+
+- **CSS/SCSS**: The project uses SCSS for styling, enabling modular and maintainable styles.
+- **Global Styles**: Defined in `src/pages/main.css` to ensure consistency across components.
+- **Theming**: PrimeReact theme is applied to provide a consistent look and feel.
+
+## 9. Component Library
+
+- **UI Library**: PrimeReact is used for commonly styled components like buttons, inputs, and dialog boxes.
+- **Custom Components**: Additional reusable components include `Navbar.tsx` and `ProtectedRoute.tsx` for navigation and access control.
+
+## 11. Deployment
+
+- **Hosting Service**: Firebase hosting.
+- **Build Commands**:
+  ```bash
+  npm run build
+  firebase deploy
+  ```
+- **CI/CD**: GitHub Actions can be set up for automated testing and deployment processes.
+
+## 12. Troubleshooting
+
+Below are some common issues and their solutions:
+- **Installation Errors**: Ensure that Node.js and npm versions meet the prerequisites.
+- **API Errors**: Verify the `API_URL` in the `.env` file.
+- **Build Errors**: Use `npm run clean` to clear the cache and rebuild.
+
+---
