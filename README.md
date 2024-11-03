@@ -24,8 +24,8 @@
 Follow these steps to set up the project:
 ```bash
 # Clone the repository
-git clone <repo-url>
-cd <project-folder>
+git clone https://github.com/sayanlp99/booktrade_frontend.git
+cd booktrade_frontend
 
 # Install dependencies
 npm install
@@ -150,7 +150,7 @@ The project uses a service layer under the `services` folder to handle API inter
 - **UI Library**: PrimeReact is used for commonly styled components like buttons, inputs, and dialog boxes.
 - **Custom Components**: Additional reusable components include `Navbar.tsx` and `ProtectedRoute.tsx` for navigation and access control.
 
-## 11. Deployment
+## 10. Deployment
 
 - **Hosting Service**: Firebase hosting.
 - **Build Commands**:
@@ -160,7 +160,7 @@ The project uses a service layer under the `services` folder to handle API inter
   ```
 - **CI/CD**: GitHub Actions can be set up for automated testing and deployment processes.
 
-## 12. Troubleshooting
+## 11. Troubleshooting
 
 Below are some common issues and their solutions:
 - **Installation Errors**: Ensure that Node.js and npm versions meet the prerequisites.
